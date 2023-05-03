@@ -1,0 +1,95 @@
+<!-- ================ HEADER ================ -->
+<header class="section-header border-bottom">
+    <section class="header-top-dark bg-primary">
+        <div class="container">
+            <nav class="d-flex justify-content-between align-items-center flex-column flex-md-row">
+                <div class="nav"> <a href="#" class="nav-link p-2"> <i class="fab fa-lg fa-facebook"></i> </a> <a
+                        href="#" class="nav-link p-2"> <i class="fab fa-lg fa-instagram"></i> </a> <a href="#"
+                        class="nav-link p-2"> <i class="fab fa-lg fa-twitter"></i> </a> <a href="#"
+                        class="nav-link p-2"> <i class="fab fa-lg fa-linkedin"></i> </a> </div>
+                <div class="rating-wrap">
+                    <ul class="rating-stars">
+                        <li style="width:80%" class="stars-active"> <i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i> </li>
+                        <li> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i> </li>
+                    </ul> <span class="label-rating">4.9/5 on Facebook and Google</span>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"> &#8358; Naira </a>
+                        <ul class="dropdown-menu">
+                            <li> <a class="dropdown-item" href="#">&dollar; Dollars</a> </li>
+                            <li> <a class="dropdown-item" href="#">&#163; Pounds</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- nav end.// -->
+        </div>
+        <!-- container end.// -->
+    </section>
+    <!-- header-top end.// -->
+    <section class="header-main border-bottom">
+        <div class="container">
+            <div class="row gx-2 gy-3">
+                <div class="col-lg-2 col-md col-6 flex-grow-0">
+                    <h3 class="m-0 p-0"><a class="link-primary text-decoration-none"
+                            href="{% url 'catalog:product_list' %}">BlueKart</a></h3>
+                    <!-- brand-wrap end.// -->
+                </div>
+                <div class="col-lg-5 col-md col-12">
+                    <form action="#" class="">
+                        <div class="input-group">
+                            <input type="search" class="form-control" style="width:55%" placeholder="Search">
+                            <select class="form-select">
+                                <option value="">All type</option>
+                                <option value="codex">Special</option>
+                                <option value="comments">Only best</option>
+                                <option value="content">Latest</option>
+                            </select>
+                            <button class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                        <!-- input-group end.// -->
+                    </form>
+                    <!-- search-wrap end.// -->
+                </div>
+                <!-- col end.// -->
+                <div class="col-lg col-12">
+                    <div class="float-md-end"> <a href="wishlist.html" class="btn btn-light"> <i
+                                class="fa fa-heart me-1"></i>
+                            Wishlist </a> <a data-bs-toggle="offcanvas" href="#offcanvas_cart" class="btn btn-light"> <i
+                                class="fa fa-shopping-cart me-1"></i> My cart </a> <button
+                            class="btn btn-dark d-md-none float-end" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#div_nav" aria-controls="div_nav" aria-expanded="false"
+                            aria-label="Toggle navigation"> <i class="fa fa-bars"></i> </button> </div>
+                </div>
+            </div>
+            <!-- row end.// -->
+        </div>
+        <!-- container end.// -->
+    </section>
+    <!-- header-main end.// -->
+    <nav class="navbar py-0 py-md-2 navbar-expand-md navbar-light">
+        <div class="container">
+            <div class="navbar-collapse collapse" id="div_nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link ps-0" href="index.html"> Home </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="products.html"> Products </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#"> Categories </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#"> Stores </a> </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"> <a class="nav-link" href="login.html">Sign in </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="profile.html">My Account </a> </li>
+                </ul>
+            </div>
+            <!-- collapse .// -->
+        </div>
+        <!-- container .// -->
+    </nav>
+</header>
+<!-- ================ HEADER END.// ================ -->

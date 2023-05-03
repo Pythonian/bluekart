@@ -1,0 +1,262 @@
+{% extends "base.html" %} 
+
+{% block title %}Home{% endblock title %} 
+
+{% block content %} 
+
+<!-- ================ SECTION INTRO ================ -->
+<section class="section-intro padding-top-sm">
+    <div class="container">
+        <main class="card p-3">
+            <div class="row">
+                <aside class="col-lg-3">
+                    <nav class="nav flex-column nav-pills">
+                        <a class="nav-link {% if not category %}active{% endif %}" href="{% url 'catalog:product_list' %}">All Products</a>
+                        {% for c in categories %}
+                        <a class="nav-link {% if category.slug == c.slug %}active{% endif %}" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                        {% endfor %}
+                    </nav>
+                </aside>
+                <div class="col-lg-9">
+                    <article class="card-banner p-5 bg-primary" style="height: 360px">
+                        <div style="max-width: 500px">
+                            <h2 class="text-white">Great products with <br> best deals </h2>
+                            <p class="text-white">No matter how far along you are in your sophistication as an
+                                amateur
+                                astronomer, there is always one.</p>
+                            <a href="#" class="btn btn-warning"> View more </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- container end.// -->
+</section>
+<!-- ================ SECTION INTRO END.// ================ -->
+
+<!-- FEATURES -->
+<section class="padding-y">
+    <div class="container">
+        <article class="card content-body">
+            <div class="row g-5">
+                <div class="col-md-3">
+                    <div class="icontext">
+                        <div class="icon"> <span class="icon-sm"> <i class="fa fa-coins fa-lg text-primary"></i>
+                            </span> </div>
+                        <div class="text">
+                            <h6 class="title">Reasonable prices</h6>
+                            <p>Have you ever finally just </p>
+                        </div>
+                    </div>
+                    <!-- icontext // -->
+                </div>
+                <!-- col // -->
+                <div class="col-md-3">
+                    <div class="icontext">
+                        <div class="icon"> <span class="icon-sm"> <i class="fa fa-car fa-lg text-primary"></i>
+                            </span> </div>
+                        <div class="text">
+                            <h6 class="title">Free shipping</h6>
+                            <p>Have you ever finally just </p>
+                        </div>
+                    </div>
+                    <!-- icontext // -->
+                </div>
+                <!-- col // -->
+                <div class="col-md-3">
+                    <div class="icontext">
+                        <div class="icon"> <span class="icon-sm"> <i class="fa fa-comment-dots fa-lg text-primary"></i>
+                            </span>
+                        </div>
+                        <div class="text">
+                            <h6 class="title">24/7 Support</h6>
+                            <p>Have you ever finally just </p>
+                        </div>
+                    </div>
+                    <!-- icontext // -->
+                </div>
+                <!-- col // -->
+                <div class="col-md-3">
+                    <div class="icontext">
+                        <div class="icon"> <span class="icon-sm"> <i class="fa fa-lock fa-lg text-primary"></i>
+                            </span> </div>
+                        <div class="text">
+                            <h6 class="title">Highly secured</h6>
+                            <p>Have you ever finally just </p>
+                        </div>
+                    </div>
+                    <!-- icontext // -->
+                </div>
+                <!-- col // -->
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- FEATURES END.// -->
+
+<!-- ================ SECTION PRODUCTS ================ -->
+<section class="padding-y">
+    <div class="container">
+
+        <header class="section-heading">
+            <h3 class="section-title">New products</h3>
+        </header>
+
+        <div class="row">
+            {% for product in products %}
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <figure class="card card-product-grid">
+                    <a href="{{ product.get_absolute_url }}" class="img-wrap">
+                        <span class="topbar"> <b class="badge bg-success"> Offer </b> </span>
+                        <img src="{% if product.image %}{{ product.image.url }}{% endif %}">
+                    </a>
+                    <figcaption class="info-wrap border-top">
+                        <a href="#" class="float-end btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
+                        <a href="{{ product.get_absolute_url }}" class="title text-truncate">{{ product.name }}</a>
+                        <small class="text-muted">Sizes: S, M, XL</small>
+                        <div class="price-wrap">
+                            <span class="price">${{ product.price }}</span> <del class="price-old">$20</del>
+                        </div>
+                        <!-- price-wrap.// -->
+                    </figcaption>
+                </figure>
+            </div>
+            {% endfor %}
+            <!-- col end.// -->
+        </div>
+        <!-- row end.// -->
+
+    </div>
+    <!-- container end.// -->
+</section>
+<!-- ================ SECTION PRODUCTS END.// ================ -->
+
+<!-- ================ SECTION FEATURE ================ -->
+<section>
+    <div class="container">
+        <article class="card p-4" style="background-color: var(--bs-primary)">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h4 class="mb-0 text-white">Best products and brands in store</h4>
+                    <p class="mb-0 text-white-50">Trendy products and text to build on the card title</p>
+                </div>
+                <div class="col-auto"> <a class="btn btn-warning" href="#">Discover</a> </div>
+            </div>
+        </article>
+    </div>
+    <!-- container end.// -->
+</section>
+<!-- ================ SECTION FEATURE END.// ================ -->
+
+<!-- ================ RECENTLY VIEWED ================ -->
+<section class="padding-y">
+    <div class="container">
+
+        <header class="section-heading">
+            <h3 class="section-title">Recently viewed</h3>
+        </header>
+
+        <div class="row gy-3">
+            <div class="col-lg-2 col-md-4 col-4">
+                <a href="#" class="img-wrap">
+                    <img height="200" width="200" class="img-thumbnail" src="">
+                </a>
+            </div>
+            <!-- col.// -->
+            <div class="col-lg-2 col-md-4 col-4">
+                <a href="#" class="img-wrap">
+                    <img height="200" width="200" class="img-thumbnail" src="">
+                </a>
+            </div>
+            <!-- col.// -->
+            <div class="col-lg-2 col-md-4 col-4">
+                <a href="#" class="img-wrap">
+                    <img height="200" width="200" class="img-thumbnail" src="">
+                </a>
+            </div>
+            <!-- col.// -->
+            <div class="col-lg-2 col-md-4 col-4">
+                <a href="#" class="img-wrap">
+                    <img height="200" width="200" class="img-thumbnail" src="">
+                </a>
+            </div>
+            <!-- col.// -->
+            <div class="col-lg-2 col-md-4 col-4">
+                <a href="#" class="img-wrap">
+                    <img height="200" width="200" class="img-thumbnail" src="">
+                </a>
+            </div>
+            <!-- col.// -->
+            <div class="col-lg-2 col-md-4 col-4">
+                <a href="#" class="img-wrap">
+                    <img height="200" width="200" class="img-thumbnail" src="">
+                </a>
+            </div>
+            <!-- col.// -->
+        </div>
+        <!-- row end.// -->
+
+    </div>
+    <!-- container end.// -->
+</section>
+<!-- ================ RECENTLY VIEWED END.// ================ -->
+
+<aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_cart">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Your cart (3) </h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <figure class="itemside mb-4">
+            <div class="aside">
+                <img src="" class="border img-sm rounded">
+            </div>
+            <figcaption class="info">
+                <a href="#" class="btn btn-icon btn-light float-end"><i class="fa fa-trash"></i></a>
+                <p> Leather Wallet for Men</p>
+                <span class="text-muted">1 x $200.95 </span> <br>
+                <strong class="price"> $400.90 </strong>
+            </figcaption>
+        </figure>
+
+        <figure class="itemside  mb-4">
+            <div class="aside">
+                <img src="" class="border img-sm rounded">
+            </div>
+            <figcaption class="info">
+                <a href="#" class="btn btn-icon btn-light float-end"><i class="fa fa-trash"></i></a>
+                <p> Canon EOS 1400 Black </p>
+                <span class="text-muted">2 x $169.95 </span> <br>
+                <strong class="price"> $339.90 </strong>
+            </figcaption>
+        </figure>
+
+        <figure class="itemside  mb-4">
+            <div class="aside">
+                <img src="" class="border img-sm rounded">
+            </div>
+            <figcaption class="info">
+                <a href="#" class="btn btn-icon btn-light float-end"><i class="fa fa-trash"></i></a>
+                <p> Winter Jacket for men and lady </p>
+                <span class="text-muted">2 x $169.95 </span> <br>
+                <strong class="price"> $339.90 </strong>
+            </figcaption>
+        </figure>
+        <hr>
+
+        <p class="mb-3 text-center"> Subtotal: <strong class="text-danger">$893.00</strong> </p>
+        <div class="mb-3">
+            <a href="cart.html" class="btn w-100 btn-primary mb-2"> Go to Cart </a>
+            <a href="checkout.html" class="btn w-100 btn-success"> Checkout </a>
+        </div>
+        <p class="mb-3 text-center"> <img src="" height="22" alt="payment-cards"> </p>
+
+    </div>
+    <!-- offcanvas-body -->
+</aside>
+<!-- offcanvas -->
+
+{% endblock content %} 
