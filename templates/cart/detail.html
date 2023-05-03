@@ -1,0 +1,174 @@
+{% extends "base.html" %} 
+
+{% block title %}Your Shopping Cart{% endblock title %}
+
+{% block content %} 
+
+<section class="padding-y bg-light">
+    <div class="container">
+
+        <!-- =================== COMPONENT CART+SUMMARY ====================== -->
+        <div class="row">
+            <div class="col-lg-9">
+
+                <div class="card">
+                    <div class="content-body">
+                        <h4 class="card-title mb-4">Your shopping cart</h4>
+                        {% for item in cart %} 
+                        {% with product=item.product %}
+                        <article class="row gy-3 mb-4">
+                            <div class="col-lg-5">
+                                <figure class="itemside me-lg-5">
+                                    <div class="aside"><img src="{% if product.image %}{{ product.image.url }}{% endif %}" class="img-sm img-thumbnail">
+                                    </div>
+                                    <figcaption class="info">
+                                        <a href="{{ product.get_absolute_url }}" class="title">{{ product.name }}</a>
+                                        <p class="text-muted"> Yellow, Jeans </p>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-auto">
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                    {% csrf_token %} 
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.override }}
+                                    <input type="submit" value="Update" class="btn btn-primary">
+                                </form>
+                            </div>
+                            <div class="col-lg-2 col-sm-4 col-6">
+                                <div class="price-wrap lh-sm">
+                                    <var class="price h6">${{ item.total_price }}</var> <br>
+                                    <small class="text-muted"> ${{ item.price }} / per item </small>
+                                </div>
+                                <!-- price-wrap .// -->
+                            </div>
+                            <div class="col-lg col-sm-4">
+                                <div class="float-lg-end">
+                                    <form method="post" action="{% url 'cart:cart_remove' product.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- row.// -->
+                        {% endwith %} 
+                        {% endfor %}
+
+                    </div>
+                    <!-- card-body .// -->
+
+                    <div class="content-body border-top">
+                        <p><i class="me-2 text-muted fa-lg fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip</p>
+                    </div>
+                    <!-- card-body.// -->
+
+                </div>
+                <!-- card.// -->
+
+            </div>
+            <!-- col.// -->
+            <aside class="col-lg-3">
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-label">Have coupon?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="Coupon code">
+                                    <button class="btn btn-light">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- card-body.// -->
+                </div>
+                <!-- card.// -->
+
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-end"> ${{ cart.get_total_price }}</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Discount:</dt>
+                            <dd class="text-end text-success"> - $60.00 </dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>TAX:</dt>
+                            <dd class="text-end"> $14.00 </dd>
+                        </dl>
+                        <hr>
+                        <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-end text-dark h5"> $357.90 </dd>
+                        </dl>
+
+                        <div class="d-grid gap-2 my-3">
+                            <a href="#" class="btn btn-success w-100"> Make Purchase </a>
+                            <a href="{% url 'catalog:product_list' %}" class="btn btn-light w-100"> Back to shop </a>
+                        </div>
+                    </div>
+                    <!-- card-body.// -->
+                </div>
+                <!-- card.// -->
+
+            </aside>
+            <!-- col.// -->
+
+        </div>
+        <!-- row.// -->
+        <!-- =================== COMPONENT 1 CART+SUMMARY .//END  ====================== -->
+
+        <br><br>
+
+    </div>
+    <!-- container .//  -->
+</section>
+
+
+
+<!-- ============== SECTION  ============== -->
+<section class="padding-y border-top">
+    <div class="container">
+        <header class="section-heading">
+            <h4 class="section-title">Recommended items</h4>
+        </header>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12">
+                <figure class="card card-product-grid">
+                    <div class="img-wrap">
+                        <span class="topbar">
+                            <a href="#" class="float-end"><i class="fa fa-lg fa-heart"></i></a>
+                            <span class="badge bg-danger"> New </span>
+                        </span>
+                        <a href="#"><img src=""></a>
+                    </div>
+                    <figcaption class="info-wrap border-top">
+                        <a href="#" class="title">Gaming Headset with Mic</a>
+                        <div class="price-wrap mb-3">
+                            <strong class="price">$18.95</strong>
+                            <del class="price-old">$24.99</del>
+                        </div>
+                        <!-- price-wrap.// -->
+                        <a href="#" class="btn btn-outline-primary w-100">Add to cart</a>
+                    </figcaption>
+                </figure>
+                <!-- card // -->
+            </div>
+            <!-- col.// -->
+        </div>
+        <!-- row.// -->
+
+    </div>
+    <!-- container .//  -->
+</section>
+<!-- ============== SECTION END// ============== -->
+
+{% endblock content %}

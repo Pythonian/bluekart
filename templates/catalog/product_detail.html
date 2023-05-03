@@ -86,7 +86,11 @@
                     <!-- row.// -->
 
                     <a href="#" class="btn  btn-warning"> Buy now </a>
-                    <a href="#" class="btn  btn-primary"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                        {% csrf_token %} 
+                        {{ cart_product_form }}
+                        <button type="submit" class="btn btn-primary"><i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
+                    </form>
                     <a href="#" class="btn  btn-light"> <i class="me-1 fa fa-heart"></i> Save </a>
 
                 </article>
