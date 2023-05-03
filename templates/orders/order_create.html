@@ -1,0 +1,100 @@
+{% extends "base.html" %} 
+
+{% block title %}Checkout{% endblock title %} 
+
+{% block content %} 
+
+<!-- ============== SECTION ============== -->
+<section class="padding-y bg-light">
+    <div class="container">
+
+
+        <div class="row">
+            <main class="col-xl-8 col-lg-8">
+
+                <article class="card mb-4">
+                    <div class="content-body">
+                        <div class="float-end">
+                            <a href="#" class="btn btn-outline-primary">Register</a>
+                            <a href="#" class="btn btn-primary">Sign in</a>
+                        </div>
+                        <h5>Have an account?</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </div>
+                </article>
+
+                <!-- ============== COMPONENT CHECKOUT =============== -->
+                <article class="card">
+                    <div class="content-body">
+                        <h5 class="card-title">Checkout Information</h5>
+                        <form action="" method="post">
+                            {% csrf_token %} 
+                            {{ form.as_p }}
+                            <input type="submit" value="Place order" class="btn btn-outline-primary">
+                        </form>
+                    </div>
+                </article>
+                <!-- ============== COMPONENT CHECKOUT .// =============== -->
+
+            </main>
+            <!-- col.// -->
+            <aside class="col-xl-4 col-lg-4">
+                <!-- ============== COMPONENT SUMMARY =============== -->
+                <article class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px">
+                    <h6 class="card-title">Summary</h6>
+
+                    <dl class="dlist-align">
+                        <dt>Total price:</dt>
+                        <dd class="text-end"> ${{ cart.get_total_price }}</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Discount:</dt>
+                        <dd class="text-end text-danger"> - $60.00 </dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Shipping cost:</dt>
+                        <dd class="text-end"> + $14.00 </dd>
+                    </dl>
+                    <hr>
+                    <dl class="dlist-align">
+                        <dt> Total: </dt>
+                        <dd class="text-end"> <strong class="text-dark">${{ cart.get_total_price }}</strong> </dd>
+                    </dl>
+
+                    <div class="input-group my-4">
+                        <input type="text" class="form-control" name="" placeholder="Promo code">
+                        <button class="btn btn-light text-primary">Apply</button>
+                    </div>
+
+                    <hr>
+                    <h6 class="mb-4">Items in cart</h6>
+
+                    {% for item in cart %}
+                    <figure class="itemside align-items-center mb-4">
+                        <div class="aside">
+                            <b class="badge bg-secondary rounded-pill">{{ item.quantity }}</b>
+                            <img src="{{ item.product.image.url }}" class="img-sm rounded border">
+                        </div>
+                        <figcaption class="info">
+                            <a href="{{ item.product.get_absolute_url }}" class="title">{{ item.product.name }}</a>
+                            <div class="price text-muted">Total: ${{ item.total_price }}</div>
+                            <!-- price .// -->
+                        </figcaption>
+                    </figure>
+                    {% endfor %}
+                    
+                </article>
+                <!-- ============== COMPONENT SUMMARY .// =============== -->
+            </aside>
+            <!-- col.// -->
+        </div>
+        <!-- row.// -->
+
+        <br><br>
+
+    </div>
+    <!-- container .//  -->
+</section>
+<!-- ============== SECTION END// ============== -->
+
+{% endblock content %}
