@@ -1,0 +1,64 @@
+{% extends "base.html" %} 
+
+{% block title %}Pay your order{% endblock title %} 
+
+{% block content %} 
+
+<section class="padding-y">
+    <div class="container">
+        <div class="row">
+            <aside class="col-lg-8">
+                <!-- ============================ COMPONENT Order Summary ================================= -->
+                <div class="card">
+                    <article class="card-body">
+                        <h4 class="card-title">Order Summary</h4>
+                        <div class="row">
+                            {% for item in order.items.all %}
+                            <div class="col-md-6">
+                                <div class="itemside mb-4">
+                                    <div class="aside"> <img src="{% if item.product.image %}{{ item.product.image.url }}{% endif %}"
+                                            class="border img-sm rounded"> </div>
+                                    <div class="info">
+                                        <p> {{ item.product.name }} </p> <span class="text-muted">{{ item.quantity }} x ${{ item.price }}
+                                        </span> <br> <strong class="price"> ${{ item.get_cost }} </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- col.// -->
+                            {% endfor %}
+                        </div>
+                        <!-- row.// -->
+                    </article>
+                    <!-- card-body.// -->
+                    <article class="card-body border-top"> 
+                        <table style="max-width:360px" class="table table-sm">
+                            <tr>
+                                <td> Subtotal ({{ order.items.count }} items): </td>
+                                <td> ${{ order.get_total_cost }} </td>
+                            </tr>
+                            <tr>
+                                <td> Delivery charge: </td>
+                                <td> $0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Total: </td>
+                                <td> <strong class="h5 price">${{ order.get_total_cost }}</strong> </td>
+                            </tr>
+                        </table>
+                        <form action="{% url 'payment:process' %}" method="post">
+                            {% csrf_token %} 
+                            <input type="submit" value="Pay Now" class="btn btn-light">
+                        </form>
+                        <!-- <a class="btn btn-light float-lg-end" href="#">
+                            <i class="fa fa-arrow-left me-2"></i> Edit order
+                        </a> -->
+                    </article>
+                    <!-- card-body.// -->
+                </div>
+                <!-- card.// -->
+                <!-- =================== COMPONENT Order Summary .// =================== -->
+            </aside>
+    </div>
+</section>
+
+{% endblock content %} 
