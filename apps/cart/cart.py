@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from apps.catalog.models import Product
+from apps.coupons.models import Coupon
 
 CART_SESSION_ID = 'cart'
 
@@ -16,6 +17,8 @@ class Cart:
             # Save an empty cart in the session
             cart = self.session[CART_SESSION_ID] = {}
         self.cart = cart
+        # store current applied coupon
+        self.coupon_id = self.session.get('coupon_id')
 
     def __iter__(self):
         """Iterate over the items in the cart and get the products from the db."""
@@ -69,3 +72,29 @@ class Cart:
         """Remove cart from user session"""
         del self.session[CART_SESSION_ID]
         self.save()
+
+    @property
+    def coupon(self):
+        """Return the Coupon object with the given ID if cart contains a coupon_id."""
+        if self.coupon_id:
+            try:
+                return Coupon.objects.get(id=self.coupon_id)
+            except Coupon.DoesNotExist:
+                pass
+        return None
+    
+    def get_discount(self):
+        """
+        Retrieve discount rate and return the amount to be deducted
+        from the total amount of the cart.
+        """
+        if self.coupon:
+            return (self.coupon.discount / Decimal(100)) * self.get_total_price()
+        return Decimal(0)
+    
+    def get_total_price_after_discount(self):
+        """Return the total amount of the cart after deducting the amount
+        returned by the get_discount() method."""
+        return self.get_total_price() - self.get_discount()
+    
+            

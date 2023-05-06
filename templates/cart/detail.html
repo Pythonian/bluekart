@@ -75,14 +75,19 @@
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label class="form-label">Have coupon?</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="" placeholder="Coupon code">
-                                    <button class="btn btn-light">Apply</button>
-                                </div>
+                        <form action="{% url 'coupons:apply' %}" method="post">
+                            {% csrf_token %} 
+                            <label class="form-label" for="">Have a discount code?</label>
+                            <div class="input-group mb-1"> 
+                                {{ coupon_apply_form }}
+                                <input type="submit" value="Apply" class="btn btn-primary" {% if cart.coupon %}disabled{% endif %}>
                             </div>
+                            {% if cart.coupon %}
+                            <small class="text-success">
+                                {{ cart.coupon.code }} ({{ cart.coupon.discount }}% off) Applied!
+                            </small>
+                            <!-- <a href="" class="text-danger small"><i class="fas fa-xmark"></i></a> -->
+                            {% endif %}
                         </form>
                     </div>
                     <!-- card-body.// -->
@@ -92,21 +97,23 @@
                 <div class="card">
                     <div class="card-body">
                         <dl class="dlist-align">
-                            <dt>Total price:</dt>
-                            <dd class="text-end"> ${{ cart.get_total_price }}</dd>
+                            <dt>Subtotal:</dt>
+                            <dd class="text-end"> ${{ cart.get_total_price|floatformat:2 }}</dd>
                         </dl>
+                        {% if cart.coupon %}
                         <dl class="dlist-align">
                             <dt>Discount:</dt>
-                            <dd class="text-end text-success"> - $60.00 </dd>
+                            <dd class="text-end text-success"> - ${{ cart.get_discount|floatformat:2 }} </dd>
                         </dl>
+                        {% endif %}
                         <dl class="dlist-align">
-                            <dt>TAX:</dt>
-                            <dd class="text-end"> $14.00 </dd>
+                            <dt>VAT:</dt>
+                            <dd class="text-end text-danger"> + $0.00 </dd>
                         </dl>
                         <hr>
                         <dl class="dlist-align">
                             <dt>Total:</dt>
-                            <dd class="text-end text-dark h5"> $357.90 </dd>
+                            <dd class="text-end text-dark h5"> ${{ cart.get_total_price_after_discount|floatformat:2 }} </dd>
                         </dl>
 
                         <div class="d-grid gap-2 my-3">

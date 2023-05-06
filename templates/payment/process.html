@@ -32,17 +32,19 @@
                     <!-- card-body.// -->
                     <article class="card-body border-top"> 
                         <table style="max-width:360px" class="table table-sm">
+                            {% if order.coupon %}
                             <tr>
-                                <td> Subtotal ({{ order.items.count }} items): </td>
-                                <td> ${{ order.get_total_cost }} </td>
+                                <td> Subtotal: </td>
+                                <td> ${{ order.get_total_cost_before_discount|floatformat:2 }} </td>
                             </tr>
                             <tr>
-                                <td> Delivery charge: </td>
-                                <td> $0.00 </td>
+                                <td> {{ order.coupon.discount }}% Discount: </td>
+                                <td> ${{ order.get_discount|floatformat:2 }} </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <td> Total: </td>
-                                <td> <strong class="h5 price">${{ order.get_total_cost }}</strong> </td>
+                                <td> <strong class="h5 price">${{ order.get_total_cost|floatformat:2 }}</strong> </td>
                             </tr>
                         </table>
                         <form action="{% url 'payment:process' %}" method="post">

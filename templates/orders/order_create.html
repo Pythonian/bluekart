@@ -47,18 +47,20 @@
                         <dt>Total price:</dt>
                         <dd class="text-end"> ${{ cart.get_total_price }}</dd>
                     </dl>
-                    <dl class="dlist-align">
-                        <dt>Discount:</dt>
-                        <dd class="text-end text-danger"> - $60.00 </dd>
+                    {% if cart.coupon %}
+                    <dl class="dlist-align text-success">
+                        <dt>"{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)</dt>
+                        <dd class="text-end text-success"> - ${{ cart.get_discount|floatformat:2 }} </dd>
                     </dl>
+                    {% endif %}
                     <dl class="dlist-align">
                         <dt>Shipping cost:</dt>
-                        <dd class="text-end"> + $14.00 </dd>
+                        <dd class="text-end"> + $0.00 </dd>
                     </dl>
                     <hr>
                     <dl class="dlist-align">
                         <dt> Total: </dt>
-                        <dd class="text-end"> <strong class="text-dark">${{ cart.get_total_price }}</strong> </dd>
+                        <dd class="text-end"> <strong class="text-dark">${{ cart.get_total_price_after_discount|floatformat:2 }}</strong> </dd>
                     </dl>
 
                     <div class="input-group my-4">
