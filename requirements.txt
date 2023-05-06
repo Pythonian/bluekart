@@ -1,9 +1,8 @@
 celery==5.2.7
-crispy-bootstrap5==0.7
 Django==4.2
-django-cleanup==7.0.0
-django-crispy-forms==2.0
 flower==1.2.0
 Pillow==9.5.0
+python-decouple==3.8
 redis==4.5.4
 stripe==5.4.0
+weasyprint==58.1

@@ -1,5 +1,4 @@
 from decimal import Decimal
-from django.conf import settings
 
 from apps.catalog.models import Product
 
@@ -17,6 +16,25 @@ class Cart:
             # Save an empty cart in the session
             cart = self.session[CART_SESSION_ID] = {}
         self.cart = cart
+
+    def __iter__(self):
+        """Iterate over the items in the cart and get the products from the db."""
+        product_ids = self.cart.keys()
+        # get the product objects and add them to the cart
+        products = Product.objects.filter(id__in=product_ids)
+        # copy the current cart in the cart variable
+        cart = self.cart.copy()
+        # add the product instances to the cart
+        for product in products:
+            cart[str(product.id)]['product'] = product
+        for item in cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
+
+    def __len__(self):
+        """Count all items in the cart."""
+        return sum(item['quantity'] for item in self.cart.values())
 
     def add(self, product, quantity=1, override_quantity=False):
         """Add a product to the cart or update its quantity."""
@@ -42,25 +60,6 @@ class Cart:
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()
-
-    def __iter__(self):
-        """Iterate over the items in the cart and get the products from the db."""
-        product_ids = self.cart.keys()
-        # get the product objects and add them to the cart
-        products = Product.objects.filter(id__in=product_ids)
-        # copy the current cart in the cart variable
-        cart = self.cart.copy()
-        # add the product instances to the cart
-        for product in products:
-            cart[str(product.id)]['product'] = product
-        for item in cart.values():
-            item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
-            yield item
-
-    def __len__(self):
-        """Count all items in the cart."""
-        return sum(item['quantity'] for item in self.cart.values())
     
     def get_total_price(self):
         """return the total cost of the items in the cart."""

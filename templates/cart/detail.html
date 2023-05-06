@@ -4,7 +4,7 @@
 
 {% block content %} 
 
-<section class="padding-y bg-light">
+<section class="py-5 bg-light">
     <div class="container">
 
         <!-- =================== COMPONENT CART+SUMMARY ====================== -->
@@ -12,7 +12,7 @@
             <div class="col-lg-9">
 
                 <div class="card">
-                    <div class="content-body">
+                    <div class="p-4">
                         <h4 class="card-title mb-4">Your shopping cart</h4>
                         {% for item in cart %} 
                         {% with product=item.product %}
@@ -58,7 +58,7 @@
                     </div>
                     <!-- card-body .// -->
 
-                    <div class="content-body border-top">
+                    <div class="p-4 border-top">
                         <p><i class="me-2 text-muted fa-lg fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -134,7 +134,7 @@
 
 
 <!-- ============== SECTION  ============== -->
-<section class="padding-y border-top">
+<section class="py-5 border-top">
     <div class="container">
         <header class="section-heading">
             <h4 class="section-title">Recommended items</h4>
