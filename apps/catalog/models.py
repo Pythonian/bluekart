@@ -1,4 +1,6 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.db.models.query import QuerySet
 from django.urls import reverse
 
 
@@ -20,12 +22,16 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('catalog:product_list_by_category',
                        args=[self.slug])
-    
+
+
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(available=True)
 
 class Product(models.Model):
     category = models.ForeignKey(Category,
                                 related_name='products',
-                                on_delete=models.CASCADE)
+                                on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     image = models.ImageField(upload_to='products/%Y/%m/%d')
@@ -34,6 +40,9 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager()
+    active = ProductManager()
 
     class Meta:
         ordering = ['name']
@@ -49,3 +58,18 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('catalog:product_detail',
                        args=[self.id, self.slug])
+    
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    author = models.CharField(max_length=50)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    content = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.content
