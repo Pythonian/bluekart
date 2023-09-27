@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+{# include 'partials/_alerts.html' #}
+
+<section class="checkout-section-2 section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-4 g-3">
+
+            <div class="col-lg-8">
+                {% if not request.user.is_authenticated %}
+                <article class="card mb-4">
+                    <div class="card-body p-4">
+                        <div class="float-end">
+                            <a href="{# url 'accounts:customer_signup' #}?next={# url 'orders:create' #}"
+                                class="btn btn-outline-info">Register</a>
+                            <a href="{# url 'accounts:login' #}?next={# url 'orders:create' #}"
+                                class="btn btn-outline-primary">Login</a>
+                        </div>
+                        <h5>Have an account?</h5>
+                        <p class="mb-0">Login and make use of your saved address and track your order.</p>
+                    </div>
+                </article>
+                {% endif %}
+                <article class="card">
+                    <form method="post" action="" novalidate>
+                        {% csrf_token %}
+                        <div class="card-body p-4">
+                            <h5 class="mb-4">{% if not request.user.is_authenticated %}Guest {% endif %} Checkout</h5>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label for="id_first_name" class="form-label">First name</label>
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="col-6">
+                                    <label for="id_last_name" class="form-label">Last name</label>
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="col-sm-8 mb-3">
+                                    <label for="id_address" class="form-label">Address</label>
+                                    {{ form.address }}
+                                </div>
+                                <div class="col-sm-4 col-6 mb-3">
+                                    <label for="id_postal_code" class="form-label">Postal code</label>
+                                    {{ form.postal_code }}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <label for="id_city" class="form-label">City</label>
+                                    {{ form.city }}
+                                </div>
+                                <div class="col-9 mb-3">
+                                    <label for="id_email" class="form-label">Email</label>
+                                    {{ form.email }}
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="float-end mb-4">
+                                <a href="{% url 'cart:detail' %}" class="btn btn-light">Cancel</a>
+                                <button type="submit" class="btn btn-success">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="right-side-summery-box">
+                    <div class="summery-box-2">
+                        <div class="summery-header">
+                            <h3>Order Summery</h3>
+                        </div>
+
+                        <ul class="summery-contain">
+                            {% for item in cart %}
+                            <li>
+                                <img src="{{ item.product.image.url }}"
+                                    class="img-fluid blur-up lazyloaded checkout-image" alt="">
+                                <h4 class="me-1">{{ item.product.name }} <span>X {{ item.quantity }}</span></h4>
+                                <h4 class="price">&#8358;{{ item.total_price }}</h4>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <ul class="summery-total">
+                            <li>
+                                <h4>Subtotal</h4>
+                                <h4 class="price">&#8358;{{ cart.get_total_price|floatformat:2|intcomma }}</h4>
+                            </li>
+
+                            <li class=" mb-2">
+                                <h4>Coupon Discount</h4>
+                                <h4 class="price">
+                                    -&#8358;{% if cart.get_discount %}{{ cart.get_discount|floatformat:2 }}{% else %}0{% endif %}
+                                </h4>
+                            </li>
+
+                            <li class="list-total">
+                                <h4>Total</h4>
+                                <h4 class="price">
+                                    &#8358;{{ cart.get_total_price_after_discount|floatformat:2|intcomma }}</h4>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

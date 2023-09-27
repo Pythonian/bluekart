@@ -1,0 +1,47 @@
+{% load humanize %}
+
+<div>
+    <div class="product-box-5 wow fadeInUp">
+        <div class="product-image">
+            <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" class="img-fluid blur-up lazyload bg-img" alt="">
+            </a>
+
+            <!-- <a href="javascript:void(0)" class="wishlist-top" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="Wishlist">
+                <i data-feather="bookmark"></i>
+            </a> -->
+
+            <!-- <ul class="product-option">
+                <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                        <i data-feather="eye"></i>
+                    </a>
+                </li>
+
+                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                    <a href="compare.html">
+                        <i data-feather="refresh-cw"></i>
+                    </a>
+                </li>
+
+                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                    <a href="wishlist.html" class="notifi-wishlist">
+                        <i data-feather="heart"></i>
+                    </a>
+                </li>
+            </ul> -->
+        </div>
+
+        <div class="product-detail">
+            <a href="{{ product.get_absolute_url }}">
+                <h5 class="name">{{ product.name }}</h5>
+            </a>
+
+            <h5 class="sold text-content">
+                <span class="theme-color price">&#8358;{{ product.price|intcomma }}</span>
+                <del>&#8358;{{ product.old_price|intcomma }}</del>
+            </h5>
+        </div>
+    </div>
+</div>

@@ -1,119 +1,190 @@
-<footer class="bg-primary text-white">
-    <div class="container">
-        <section class="py-5">
-            <div class="row gy-4">
-                <aside class="col-12 col-sm-12 col-lg-3">
-                    <article class="me-lg-4">
-                        <h3>BlueKart</h3>
-                        <p class="mt-3"> &copy;{% now "Y" %} &bull; All rights reserved. </p>
-                        <nav> 
-                            <a class="btn btn-info" title="Facebook" target="_blank" href="#">
+{% load static %}
+
+<footer class="section-t-space footer-section-2 footer-color-3">
+    <div class="container-fluid-lg">
+        <div class="main-footer">
+            <div class="row g-md-4 gy-sm-5">
+                <div class="col-xxl-3 col-xl-4 col-sm-6">
+                    <a href="index.html" class="foot-logo theme-logo">
+                        <img src="{% static 'images/logo/4.png' %}" class="img-fluid blur-up lazyload" alt="">
+                    </a>
+                    <p class="information-text information-text-2">it is a long established fact that a
+                        reader
+                        will
+                        be distracted by the readable content.</p>
+                    <ul class="social-icon">
+                        <li class="light-bg">
+                            <a href="https://www.facebook.com/" class="footer-link-color">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a class="btn btn-info" title="Instagram" target="_blank" href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a> 
-                            <a class="btn btn-info" title="Youtube" target="_blank" href="#">
-                                <i class="fab fa-youtube"></i>
-                            </a> 
-                            <a class="btn btn-info" title="Twitter" target="_blank" href="#">
+                        </li>
+                        <li class="light-bg">
+                            <a href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+                                class="footer-link-color">
+                                <i class="fab fa-google"></i>
+                            </a>
+                        </li>
+                        <li class="light-bg">
+                            <a href="https://twitter.com/i/flow/login" class="footer-link-color">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </nav>
-                    </article>
-                </aside>
-                <aside class="col-12 col-md-4 col-lg-2">
-                    <h6>Store</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">About us</a>
                         </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Find store</a>
+                        <li class="light-bg">
+                            <a href="https://www.instagram.com/" class="footer-link-color">
+                                <i class="fab fa-instagram"></i>
+                            </a>
                         </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Categories</a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Blogs</a>
+                        <li class="light-bg">
+                            <a href="https://in.pinterest.com/" class="footer-link-color">
+                                <i class="fab fa-pinterest-p"></i>
+                            </a>
                         </li>
                     </ul>
-                </aside>
-                <aside class="col-12 col-md-4 col-lg-2">
-                    <h6>Information</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Help center</a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Money refund</a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Shipping info</a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#">Refunds</a>
-                        </li>
-                    </ul>
-                </aside>
-                <aside class="col-12 col-md-4 col-lg-2">
-                    <h6>Support</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#"> Help center </a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#"> Documents </a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#"> Account restore </a>
-                        </li>
-                        <li class="mb-1"> 
-                            <a href="#" class="link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover text-white" href="#"> My Orders </a>
-                        </li>
-                    </ul>
-                </aside>
-                <aside class="col-12 col-sm-12 col-lg-3">
-                    <h6>Newsletter</h6>
-                    <p>Stay in touch with latest updates about our products and offers </p>
+                </div>
 
-                    <form class="mb-3">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Email">
-                            <button class="btn btn-dark" type="submit">
-                                Join
-                            </button>
-                        </div>
-                        <!-- input-group.// -->
-                    </form>
-                </aside>
-            </div>
-            <!-- row.// -->
-        </section>
-        <!-- footer-top.// -->
-        <hr class="my-0">
-        <section class="py-3 d-flex justify-content-between">
-            <div>
-                <i class="fab fa-lg fa-cc-visa"></i>
-                <i class="fab fa-lg fa-cc-amex"></i>
-                <i class="fab fa-lg fa-cc-mastercard"></i>
-                <i class="fab fa-lg fa-cc-paypal"></i>
-            </div>
-            <nav class="dropup">
-                <button class="dropdown-toggle btn text-white d-flex align-items-center py-0" type="button"
-                    data-bs-toggle="dropdown">
-                    <span>English</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Russian</a></li>
-                    <li><a class="dropdown-item" href="#">Arabic</a></li>
-                    <li><a class="dropdown-item" href="#">Spanish</a></li>
-                </ul>
-            </nav>
+                <div class="col-xxl-2 col-xl-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4 class="text-white">About Fastkart</h4>
+                    </div>
+                    <ul class="footer-list footer-contact footer-list-light">
+                        <li>
+                            <a href="about-us.html" class="light-text">About Us</a>
+                        </li>
+                        <li>
+                            <a href="contact-us.html" class="light-text">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/term_condition.html"
+                                class="light-text">Terms & Coditions</a>
+                        </li>
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/careers.html"
+                                class="light-text">Careers</a>
+                        </li>
+                        <li>
+                            <a href="blog-list.html" class="light-text">Latest Blog</a>
+                        </li>
+                    </ul>
+                </div>
 
-        </section>
+                <div class="col-xxl-2 col-xl-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4 class="text-white">Useful Link</h4>
+                    </div>
+                    <ul class="footer-list footer-list-light footer-contact">
+                        <li>
+                            <a href="order-success.html" class="light-text">Your Order</a>
+                        </li>
+                        <li>
+                            <a href="user-dashboard.html" class="light-text">Your Account</a>
+                        </li>
+                        <li>
+                            <a href="order-tracking.html" class="light-text">Track Orders</a>
+                        </li>
+                        <li>
+                            <a href="wishlist.html" class="light-text">Your Wishlist</a>
+                        </li>
+                        <li>
+                            <a href="faq.html" class="light-text">FAQs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-xxl-2 col-xl-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4 class="text-white">Categories</h4>
+                    </div>
+                    <ul class="footer-list footer-list-light footer-contact">
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/vegetables-demo.html"
+                                class="light-text">Fresh Vegetables</a>
+                        </li>
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/spice-demo.html"
+                                class="light-text">Hot Spice</a>
+                        </li>
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/bags-demo.html"
+                                class="light-text">Brand New Bags</a>
+                        </li>
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/bakery-demo.html"
+                                class="light-text">New Bakery</a>
+                        </li>
+                        <li>
+                            <a href="https://themes.pixelstrap.com/fastkart/front-end/grocery-demo.html"
+                                class="light-text">New Grocery</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-xxl-3 col-xl-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4 class="text-white">Store infomation</h4>
+                    </div>
+                    <ul class="footer-address footer-contact">
+                        <li>
+                            <a href="javascript:void(0)" class="light-text">
+                                <div class="inform-box flex-start-box">
+                                    <i data-feather="map-pin"></i>
+                                    <p>Fastkart Demo Store, Demo store india 345 - 659</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" class="light-text">
+                                <div class="inform-box">
+                                    <i data-feather="phone"></i>
+                                    <p>Call us: 123-456-7890</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" class="light-text">
+                                <div class="inform-box">
+                                    <i data-feather="mail"></i>
+                                    <p>Email Us: Support@Fastkart.com</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" class="light-text">
+                                <div class="inform-box">
+                                    <i data-feather="printer"></i>
+                                    <p>Fax: 123456</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-footer sub-footer-lite section-b-space section-t-space">
+            <div class="left-footer">
+                <p class="light-text">2022 Copyright By Themeforest Powered By Pixelstrap</p>
+            </div>
+
+            <ul class="payment-box">
+                <li>
+                    <img src="{% static 'images/icon/paymant/visa.png' %}" class="blur-up lazyload" alt="">
+                </li>
+                <li>
+                    <img src="{% static 'images/icon/paymant/discover.png' %}" alt="" class="blur-up lazyload">
+                </li>
+                <li>
+                    <img src="{% static 'images/icon/paymant/american.png' %}" alt="" class="blur-up lazyload">
+                </li>
+                <li>
+                    <img src="{% static 'images/icon/paymant/master-card.png' %}" alt="" class="blur-up lazyload">
+                </li>
+                <li>
+                    <img src="{% static 'images/icon/paymant/giro-pay.png' %}" alt="" class="blur-up lazyload">
+                </li>
+            </ul>
+        </div>
     </div>
-    <!-- container end.// -->
 </footer>
-
-<!-- ================ FOOTER END.// ================ -->

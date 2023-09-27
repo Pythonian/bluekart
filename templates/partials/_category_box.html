@@ -1,0 +1,10 @@
+{% load static %}
+
+<div>
+    <a href="{# url 'category.get_absolute_url' #}" class="category-box category-dark wow fadeInUp">
+        <div>
+            <img src="{{ category.icon.url }}" class="blur-up lazyload" alt="">
+            <h5>{{ category.name }}</h5>
+        </div>
+    </a>
+</div>

@@ -1,181 +1,134 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}Your shopping cart{% endblock %}
 
-{% block title %}Your Shopping Cart{% endblock title %}
+{% block content %}
 
-{% block content %} 
+<!-- Cart Section Start -->
+<section class="cart-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-5 g-3">
+            <div class="col-xl-9">
+                <div class="cart-table">
+                    <div class="table-responsive-xl">
+                        <table class="table">
+                            <tbody>
+                                {% for item in cart %}
+                                {% with product=item.product %}
+                                <tr class="product-box-contain">
+                                    <td class="product-detail">
+                                        <div class="product border-0">
+                                            <a href="{{ product.get_absolute_url }}" class="product-image">
+                                                <img src="{{ product.image.url }}" class="img-fluid blur-up lazyload"
+                                                    alt="">
+                                            </a>
+                                            <div class="product-detail">
+                                                <ul>
+                                                    <li class="name">
+                                                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
 
-<section class="py-5 bg-light">
-    <div class="container">
+                                    <td class="price">
+                                        <h4 class="table-title text-content">Price</h4>
+                                        <h5>&#8358;{{ item.total_price }}</h5>
+                                        <small class="text-muted">&#8358;{{ item.price }} / per item </small>
+                                    </td>
 
-        <!-- =================== COMPONENT CART+SUMMARY ====================== -->
-        <div class="row">
-            <div class="col-lg-9">
+                                    <td class="quantity">
+                                        <h4 class="table-title text-content">Qty</h4>
+                                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ item.update_quantity_form.quantity }}
+                                            {{ item.update_quantity_form.override }}
+                                            <input type="submit" value="Update" 1class="btn btn-primary">
+                                        </form>
+                                    </td>
 
-                <div class="card">
-                    <div class="p-4">
-                        <h4 class="card-title mb-4">Your shopping cart</h4>
-                        {% for item in cart %} 
-                        {% with product=item.product %}
-                        <article class="row gy-3 mb-4">
-                            <div class="col-lg-5">
-                                <figure class="itemside me-lg-5">
-                                    <div class="aside"><img src="{% if product.image %}{{ product.image.url }}{% endif %}" class="img-sm img-thumbnail">
-                                    </div>
-                                    <figcaption class="info">
-                                        <a href="{{ product.get_absolute_url }}" class="title">{{ product.name }}</a>
-                                        <p class="text-muted"> Yellow, Jeans </p>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="col-auto">
-                                <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                                    {% csrf_token %} 
-                                    {{ item.update_quantity_form.quantity }}
-                                    {{ item.update_quantity_form.override }}
-                                    <input type="submit" value="Update" class="btn btn-primary">
-                                </form>
-                            </div>
-                            <div class="col-lg-2 col-sm-4 col-6">
-                                <div class="price-wrap lh-sm">
-                                    <var class="price h6">${{ item.total_price }}</var> <br>
-                                    <small class="text-muted"> ${{ item.price }} / per item </small>
-                                </div>
-                                <!-- price-wrap .// -->
-                            </div>
-                            <div class="col-lg col-sm-4">
-                                <div class="float-lg-end">
-                                    <form method="post" action="{% url 'cart:cart_remove' product.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </article>
-                        <!-- row.// -->
-                        {% endwith %} 
-                        {% endfor %}
-
+                                    <td class="save-remove">
+                                        <h4 class="table-title text-content">Action</h4>
+                                        <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Remove" 1class="btn btn-light text-danger">
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endwith %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- card-body .// -->
-
-                    <div class="p-4 border-top">
-                        <p><i class="me-2 text-muted fa-lg fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip</p>
-                    </div>
-                    <!-- card-body.// -->
-
                 </div>
-                <!-- card.// -->
-
             </div>
-            <!-- col.// -->
-            <aside class="col-lg-3">
 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <form action="{% url 'coupons:apply' %}" method="post">
-                            {% csrf_token %} 
-                            <label class="form-label" for="">Have a discount code?</label>
-                            <div class="input-group mb-1"> 
-                                {{ coupon_apply_form }}
-                                <input type="submit" value="Apply" class="btn btn-primary" {% if cart.coupon %}disabled{% endif %}>
-                            </div>
-                            {% if cart.coupon %}
-                            <small class="text-success">
-                                {{ cart.coupon.code }} ({{ cart.coupon.discount }}% off) Applied!
-                            </small>
-                            <!-- <a href="" class="text-danger small"><i class="fas fa-xmark"></i></a> -->
-                            {% endif %}
-                        </form>
+            <div class="col-xl-3">
+                <div class="summery-box p-sticky">
+                    <div class="summery-header">
+                        <h3>Cart Total</h3>
                     </div>
-                    <!-- card-body.// -->
-                </div>
-                <!-- card.// -->
 
-                <div class="card">
-                    <div class="card-body">
-                        <dl class="dlist-align">
-                            <dt>Subtotal:</dt>
-                            <dd class="text-end"> ${{ cart.get_total_price|floatformat:2 }}</dd>
-                        </dl>
+                    <div class="summery-contain">
                         {% if cart.coupon %}
-                        <dl class="dlist-align">
-                            <dt>Discount:</dt>
-                            <dd class="text-end text-success"> - ${{ cart.get_discount|floatformat:2 }} </dd>
-                        </dl>
+                        <h4 class="mb-2">{% trans "Your coupon" %}:</h4>
+                        {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                        <span class="text-success">{{ code }} ({{ discount }}% off) Coupon Code
+                            Applied!</span>
+                        {% endblocktrans %}
+                        {% else %}
+                        <div class="coupon-cart">
+                            <h6 class="text-content mb-2">{% trans "Apply a coupon" %}</h6>
+                            <form action="{% url 'coupons:apply' %}" method="post">
+                                {% csrf_token %}
+                                <div class="mb-3 coupon-box input-group">
+                                    {{ coupon_apply_form }}
+                                    <button type="submit" class="btn-apply">Apply</button>
+                                </div>
+                            </form>
+                        </div>
                         {% endif %}
-                        <dl class="dlist-align">
-                            <dt>VAT:</dt>
-                            <dd class="text-end text-danger"> + $0.00 </dd>
-                        </dl>
-                        <hr>
-                        <dl class="dlist-align">
-                            <dt>Total:</dt>
-                            <dd class="text-end text-dark h5"> ${{ cart.get_total_price_after_discount|floatformat:2 }} </dd>
-                        </dl>
+                        <ul>
+                            <li>
+                                <h4>Subtotal</h4>
+                                <h4 class="price">&#8358;{{ cart.get_total_price|floatformat:2|intcomma }}</h4>
+                            </li>
 
-                        <div class="d-grid gap-2 my-3">
-                            <a href="{% url 'orders:order_create' %}" class="btn btn-success w-100"> Checkout </a>
-                            <a href="{% url 'catalog:product_list' %}" class="btn btn-light w-100"> Continue shopping </a>
-                        </div>
+                            <li>
+                                <h4>Coupon Discount</h4>
+                                <h4 class="price">(-) &#8358;{{ cart.get_discount|floatformat:2 }}</h4>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- card-body.// -->
+
+                    <ul class="summery-total">
+                        <li class="list-total border-top-0">
+                            <h4>Total</h4>
+                            <h4 class="price theme-color">
+                                &#8358;{{ cart.get_total_price_after_discount|floatformat:2|intcomma }}</h4>
+                        </li>
+                    </ul>
+
+                    <div class="button-group cart-button">
+                        <ul>
+                            <li>
+                                <button onclick="location.href = '{% url 'orders:create' %}';"
+                                    class="btn btn-animation proceed-btn fw-bold">Proceed To Checkout</button>
+                            </li>
+
+                            <li>
+                                <button onclick="location.href = '{% url 'core:home' %}';"
+                                    class="btn btn-light shopping-button text-dark">
+                                    <i class="fa-solid fa-arrow-left-long"></i>Return To Shopping</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- card.// -->
-
-            </aside>
-            <!-- col.// -->
-
-        </div>
-        <!-- row.// -->
-        <!-- =================== COMPONENT 1 CART+SUMMARY .//END  ====================== -->
-
-        <br><br>
-
-    </div>
-    <!-- container .//  -->
-</section>
-
-
-
-<!-- ============== SECTION  ============== -->
-<section class="py-5 border-top">
-    <div class="container">
-        <header class="section-heading">
-            <h4 class="section-title">Recommended items</h4>
-        </header>
-
-        <div class="row">
-            <div class="col-lg-3 col-sm-6 col-12">
-                <figure class="card card-product-grid">
-                    <div class="img-wrap">
-                        <span class="topbar">
-                            <a href="#" class="float-end"><i class="fa fa-lg fa-heart"></i></a>
-                            <span class="badge bg-danger"> New </span>
-                        </span>
-                        <a href="#"><img src=""></a>
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                        <a href="#" class="title">Gaming Headset with Mic</a>
-                        <div class="price-wrap mb-3">
-                            <strong class="price">$18.95</strong>
-                            <del class="price-old">$24.99</del>
-                        </div>
-                        <!-- price-wrap.// -->
-                        <a href="#" class="btn btn-outline-primary w-100">Add to cart</a>
-                    </figcaption>
-                </figure>
-                <!-- card // -->
             </div>
-            <!-- col.// -->
         </div>
-        <!-- row.// -->
-
     </div>
-    <!-- container .//  -->
 </section>
-<!-- ============== SECTION END// ============== -->
+<!-- Cart Section End -->
 
-{% endblock content %}
+{% endblock %}

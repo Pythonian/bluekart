@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Home Section Start -->
+<section class="home-section-2 home-section-bg pt-0 overflow-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-animate">
+                    <div>
+                        <div class="home-contain rounded-0 p-0">
+                            <img src="https://placehold.it/1024x500" class="img-fluid bg-img blur-up lazyload" alt="">
+                            <div class="home-detail home-big-space p-center-left home-overlay position-relative">
+                                <div class="container-fluid-lg">
+                                    <div>
+                                        <h6 class="ls-expanded text-uppercase text-danger">Weekend Special offer
+                                        </h6>
+                                        <h1 class="heding-2">Premium Quality</h1>
+                                        <h5 class="text-content">Fresh & Top Quality Dry Fruits are available here!
+                                        </h5>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';"
+                                            class="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2 mend-auto">Shop
+                                            Now <i class="fa-solid fa-arrow-right icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Home Section End -->
+
+<!-- Category Section Start -->
+<section>
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-9">
+                    {% for category in categories %}
+                    {% include "partials/_category_box.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Category Section End -->
+
+<!-- Deal Section Start -->
+<section class="product-section product-section-3">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>Featured Items</h2>
+        </div>
+        <div class="row g-sm-4 g-3">
+            <div class="col-xxl-12 ratio_110">
+                <div class="slider-6 img-slider">
+                    {% for product in featured_products %}
+                    {% include "partials/_product_box.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Deal Section End -->
+
+<!-- Top Selling Section Start -->
+<section class="top-selling-section">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <!-- Banner -->
+            <div class="col-xxl-3 col-lg-4 d-lg-block d-none">
+                <div class="ratio_156">
+                    <div class="banner-contain-2 hover-effect">
+                        <img src="{% static 'images/fashion/banner/3.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                        <div class="banner-detail-2 p-bottom-center text-center home-p-medium">
+                            <div>
+                                <h2 class="text-qwitcher">Passion Meet</h2>
+                                <h3>PERFECTION</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Banner -->
+
+            <div class="col-xxl-9 col-lg-8">
+                <div class="slider-3_3 product-wrapper">
+
+                    <div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="top-selling-box">
+                                    <div class="top-selling-title">
+                                        <h3>Recently added</h3>
+                                    </div>
+                                    {% for product in recently_added_products %}
+                                    {% include "partials/_top_selling_product.html" %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="top-selling-box">
+                                    <div class="top-selling-title">
+                                        <h3>Recently Sold</h3>
+                                    </div>
+
+                                    {% for product in recently_sold_products %}
+                                    {% include "partials/_top_selling_product.html" %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="top-selling-box">
+                                    <div class="top-selling-title">
+                                        <h3>Top Rated</h3>
+                                    </div>
+
+                                    {% for product in top_rated_products %}
+                                    {% include "partials/_top_selling_product.html" %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Top Selling Section End -->
+
+
+<!-- banner section start -->
+<section class="section-t-space">
+    <div class="container-fluid-lg">
+        <div class="banner-contain">
+            <img src="https://placehold.it/1024x300" class="bg-img blur-up lazyload" alt="">
+            <div class="banner-details p-center p-4 text-white text-center">
+                <div>
+                    <h3 class="lh-base fw-bold offer-text">Promotion Banner Example</h3>
+                    <h6 class="coupon-code coupon-code-white">Use Code : FASHIONWEEK23</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner section start -->
+
+
+<!-- Deal Section Start -->
+<section class="product-section product-section-3">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>Recommended Items</h2>
+        </div>
+        <div class="row g-sm-4 g-3 section-b-space">
+            <div class="col-xxl-12 ratio_110">
+                <div class="slider-6 img-slider">
+                    {% for product in recommended_products %}
+                    {% include "partials/_product_slider.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Deal Section End -->
+
+{% if recently_viewed_products %}
+<section class="product-section product-section-3 pb-5">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>Recently Viewed</h2>
+        </div>
+        <div class="row g-sm-4 g-3 section-b-space">
+            <div class="col-xxl-12 ratio_110">
+                <div class="slider-6 img-slider">
+                    {% for product in recently_viewed_products %}
+                    {% include "partials/_product_slider.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}

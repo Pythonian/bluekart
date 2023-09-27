@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+{# include 'partials/_alerts.html' #}
+
+<section class="checkout-section-2 section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-4 g-3">
+
+            <div class="col-lg-4 mx-auto">
+                <div class="right-side-summery-box">
+                    <div class="summery-box-2">
+                        <div class="summery-header">
+                            <h3>Order Summery</h3>
+                        </div>
+
+                        <ul class="summery-contain">
+                            {% for item in cart %}
+                            <li>
+                                <img src="{{ item.product.image.url }}"
+                                    class="img-fluid blur-up lazyloaded checkout-image" alt="">
+                                <h4 class="me-1">{{ item.product.name }} <span>X {{ item.quantity }}</span></h4>
+                                <h4 class="price">&#8358;{{ item.total_price }}</h4>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <ul class="summery-total">
+                            <li>
+                                <h4>Subtotal</h4>
+                                <h4 class="price">&#8358;{{ cart.get_total_price|floatformat:2|intcomma }}</h4>
+                            </li>
+
+                            <li class=" mb-2">
+                                <h4>Coupon Discount</h4>
+                                <h4 class="price">
+                                    -&#8358;{% if cart.get_discount %}{{ cart.get_discount|floatformat:2 }}{% else %}0{% endif %}
+                                </h4>
+                            </li>
+
+                            <li class="list-total">
+                                <h4>Total</h4>
+                                <h4 class="price">
+                                    &#8358;{{ cart.get_total_price_after_discount|floatformat:2|intcomma }}</h4>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold">Place Order</button>
+                    <form>
+                        <script src="https://js.paystack.co/v1/inline.js"></script>
+                        <button type="button" onclick="payWithPaystack()"> Pay With Paystack </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block paystack %}
+<script>
+    function payWithPaystack() {
+        var handler = PaystackPop.setup({
+            key: '{{ paystack_key }}',
+            email: '{{ order.email }}',
+            amount: {{ paystack_amount }},
+    reference: '' + Math.floor((Math.random() * 1000000000) + 1),
+        callback: function(response) {
+            window.location.href = "{{ paystack_redirect_url }}&trxref=" + response.reference
+        },
+    onClose: function() {
+        alert('Your transaction was either aborted or not completed, this window would be closed.');
+    }
+    });
+    handler.openIframe();
+  }
+</script>
+{% endblock %}
